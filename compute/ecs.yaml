@@ -66,6 +66,9 @@ Parameters:
     Description: AMI ID optimized for ecs. Do not change to get latest
     Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
     Default: /aws/service/ecs/optimized-ami/amazon-linux/recommended/image_id
+  RepositoryName:
+    Type: String
+    Default: demoecr
 Resources:
 
   ECSCluster:
@@ -86,7 +89,7 @@ Resources:
             "demo-sg-ecs"
       SubnetId:
         Fn::ImportValue:
-          "demo-PublicSubnet1"
+          "demo-PrivateSubnet1"
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName} Container Instance"
